@@ -26,6 +26,16 @@ This client allows you to send messages to a Slack channel using a Slack App.
     *   In your Slack workspace, go to the channel where you want to send messages.
     *   Type `/invite @your-app-name` (replace `your-app-name` with the name of your app) and send the message.
 
+## Install
+Install the slack client by adding the following dependency:
+```xml
+<dependency>
+    <groupId>com.n1netails</groupId>
+    <artifactId>n1netails-slack-client</artifactId>
+    <version>0.1.0</version>
+</dependency>
+```
+
 ## Usage
 Here's how to use the client to send a message:
 
@@ -41,7 +51,7 @@ public class Example {
         String token = "xoxb-your-bot-token";
 
         // The channel you want to send the message to (e.g., "#general")
-        String channel = "C1234567890"; // or "#channel-name"
+        String channel = "#prototype"; // or "#channel-name"
 
         // Create the bot service
         BotService botService = new BotService(token);
@@ -64,12 +74,6 @@ public class Example {
     }
 }
 ```
-
-
-
-
-
-
 
 # Develop
 ## Build

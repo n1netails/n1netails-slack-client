@@ -1,6 +1,7 @@
 package com.n1netails.n1netails.slack.api;
 
 import com.n1netails.n1netails.slack.exception.SlackClientException;
+import com.n1netails.n1netails.slack.model.SlackMessage;
 
 /**
  * Slick Client

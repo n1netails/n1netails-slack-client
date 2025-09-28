@@ -2,6 +2,7 @@ package com.n1netails.n1netails.slack.internal;
 
 import com.n1netails.n1netails.slack.api.SlackClient;
 import com.n1netails.n1netails.slack.exception.SlackClientException;
+import com.n1netails.n1netails.slack.model.SlackMessage;
 import com.n1netails.n1netails.slack.service.BotService;
 
 /**
@@ -19,7 +20,7 @@ public class SlackClientImpl implements SlackClient {
      * @param slackMessage slack message
      */
     @Override
-    public void sendMessage(com.n1netails.n1netails.slack.model.SlackMessage slackMessage) throws SlackClientException {
+    public void sendMessage(SlackMessage slackMessage) throws SlackClientException {
         botService.send(slackMessage);
     }
 }
