@@ -4,7 +4,7 @@
 
   <groupId>com.n1netails</groupId>
   <artifactId>n1netails-slack-client</artifactId>
-  <version>0.1.0</version>
+  <version>0.1.1</version>
   <packaging>jar</packaging>
 
   <name>n1netails-slack-client</name>
@@ -46,14 +46,14 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.38</version>
+      <version>1.18.42</version>
       <scope>provided</scope>
     </dependency>
 
     <dependency>
       <groupId>com.slack.api</groupId>
       <artifactId>slack-api-client</artifactId>
-      <version>1.45.3</version>
+      <version>1.45.4</version>
     </dependency>
   </dependencies>
 
