@@ -85,6 +85,44 @@ public class Example {
 }
 ```
 
+## Advanced Usage (Using Block Kit)
+You can also send more complex messages using [Slack's Block Kit](https://api.slack.com/block-kit).
+
+```java
+import com.n1netails.n1netails.slack.api.SlackClient;
+import com.n1netails.n1netails.slack.internal.SlackClientImpl;
+import com.n1netails.n1netails.slack.model.SlackMessage;
+import com.n1netails.n1netails.slack.service.BotService;
+import com.slack.api.model.block.Blocks;
+import com.slack.api.model.block.composition.BlockCompositions;
+
+import java.util.Arrays;
+
+public class AdvancedExample {
+    public static void main(String[] args) {
+        String token = "xoxb-your-bot-token";
+        String channel = "#prototype";
+
+        BotService botService = new BotService(token);
+        SlackClient slackClient = new SlackClientImpl(botService);
+
+        SlackMessage message = new SlackMessage();
+        message.setChannel(channel);
+        message.setText("This is a fallback message for notifications.");
+        message.setBlocks(Arrays.asList(
+                Blocks.section(section -> section.text(BlockCompositions.markdownText("*This is a message with blocks.*")))
+        ));
+
+        try {
+            slackClient.sendMessage(message);
+            System.out.println("Advanced message sent successfully!");
+        } catch (Exception e) {
+            System.err.println("Error sending message: " + e.getMessage());
+        }
+    }
+}
+```
+
 # Develop
 ## Build
 Build the project using the following command
