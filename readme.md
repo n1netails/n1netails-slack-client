@@ -123,6 +123,11 @@ public class AdvancedExample {
 }
 ```
 
+#### Example message output
+<div align="center">
+  <img src="slack-message.png" alt="N1netails slack message simple" width="500" style="display: block; margin: auto;"/>
+</div>
+
 # Develop
 ## Build
 Build the project using the following command
