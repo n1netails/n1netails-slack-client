@@ -51,7 +51,7 @@ Here's how to use the client to send a message:
 
 ```java
 import com.n1netails.n1netails.slack.api.SlackClient;
-import com.n1netails.n1netails.slack.internal.SlackClientImpl;
+import com.n1netails.n1netails.slack.api.SlackClientImpl;
 import com.n1netails.n1netails.slack.model.SlackMessage;
 import com.n1netails.n1netails.slack.service.BotService;
 
@@ -90,7 +90,7 @@ You can also send more complex messages using [Slack's Block Kit](https://api.sl
 
 ```java
 import com.n1netails.n1netails.slack.api.SlackClient;
-import com.n1netails.n1netails.slack.internal.SlackClientImpl;
+import com.n1netails.n1netails.slack.api.SlackClientImpl;
 import com.n1netails.n1netails.slack.model.SlackMessage;
 import com.n1netails.n1netails.slack.service.BotService;
 import com.slack.api.model.block.Blocks;

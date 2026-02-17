@@ -16,8 +16,20 @@
     <connection>scm:git:git://github.com/n1netails/n1netails-slack-client.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:n1netails/n1netails-slack-client.git</developerConnection>
   </scm>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <licenses>
+    <licenses>
     <license>
       <name>MIT License</name>
       <url>https://opensource.org/licenses/MIT</url>
