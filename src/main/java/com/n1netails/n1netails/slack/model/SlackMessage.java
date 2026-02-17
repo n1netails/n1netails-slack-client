@@ -9,6 +9,7 @@ import java.util.List;
 
 /**
  * Slack Message
+ *
  * @author shahid foy
  */
 @Getter
@@ -60,10 +61,21 @@ public class SlackMessage {
             if (channel == null || channel.isBlank()) {
                 throw new IllegalStateException("channel is required");
             }
-            if ((text == null || text.isBlank()) && blocks.isEmpty() && rawBlocks.isEmpty()) {
+
+            boolean hasTextOrBlocks = (text != null && !text.isBlank())
+                    || (!blocks.isEmpty())
+                    || (!rawBlocks.isEmpty());
+
+            if (!hasTextOrBlocks) {
                 throw new IllegalStateException("Either text, blocks, or rawBlocks must be provided");
             }
+
+            if (!blocks.isEmpty() && !rawBlocks.isEmpty()) {
+                throw new IllegalStateException("Cannot mix SlackBlock and rawBlocks in the same message");
+            }
+
             return new SlackMessage(this);
         }
+
     }
 }

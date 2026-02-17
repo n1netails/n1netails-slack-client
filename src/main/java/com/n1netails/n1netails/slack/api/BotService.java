@@ -39,7 +39,7 @@ class BotService {
                     ChatPostMessageRequest.builder()
                             .channel(slackMessage.getChannel())
                             .text(slackMessage.getText());
-            List<LayoutBlock> finalBlocks = null;
+            List<LayoutBlock> finalBlocks;
             if (slackMessage.getRawBlocks() != null && !slackMessage.getRawBlocks().isEmpty()) {
                 finalBlocks = slackMessage.getRawBlocks();
 
@@ -47,7 +47,8 @@ class BotService {
                 finalBlocks = slackMessage.getBlocks().stream()
                         .map(SlackBlock::toLayoutBlock)
                         .toList();
-            }
+            } else
+                finalBlocks = null;
 
             if (finalBlocks != null && !finalBlocks.isEmpty()) {
                 requestBuilder.blocks(finalBlocks);
