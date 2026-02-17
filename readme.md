@@ -53,7 +53,7 @@ Here's how to use the client to send a message:
 import com.n1netails.n1netails.slack.api.SlackClient;
 import com.n1netails.n1netails.slack.api.SlackClientImpl;
 import com.n1netails.n1netails.slack.model.SlackMessage;
-import com.n1netails.n1netails.slack.service.BotService;
+import com.n1netails.n1netails.slack.api.BotService;
 
 public class Example {
     public static void main(String[] args) {
@@ -63,11 +63,8 @@ public class Example {
         // The channel you want to send the message to (e.g., "#general")
         String channel = "#prototype"; // or "#channel-name"
 
-        // Create the bot service
-        BotService botService = new BotService(token);
-
-        // Create the Slack client
-        SlackClient slackClient = new SlackClientImpl(botService);
+        // Use builder to create a client
+        SlackClient client = SlackClient.builder().token(token).build();
 
         // Create the message
         SlackMessage message = new SlackMessage();
@@ -92,7 +89,7 @@ You can also send more complex messages using [Slack's Block Kit](https://api.sl
 import com.n1netails.n1netails.slack.api.SlackClient;
 import com.n1netails.n1netails.slack.api.SlackClientImpl;
 import com.n1netails.n1netails.slack.model.SlackMessage;
-import com.n1netails.n1netails.slack.service.BotService;
+import com.n1netails.n1netails.slack.api.BotService;
 import com.slack.api.model.block.Blocks;
 import com.slack.api.model.block.composition.BlockCompositions;
 
@@ -103,8 +100,7 @@ public class AdvancedExample {
         String token = "xoxb-your-bot-token";
         String channel = "#prototype";
 
-        BotService botService = new BotService(token);
-        SlackClient slackClient = new SlackClientImpl(botService);
+        SlackClient client = SlackClient.builder().token(token).build();
 
         SlackMessage message = new SlackMessage();
         message.setChannel(channel);
