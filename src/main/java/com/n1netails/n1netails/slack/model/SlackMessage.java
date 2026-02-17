@@ -1,5 +1,8 @@
 package com.n1netails.n1netails.slack.model;
 
+import com.n1netails.n1netails.slack.exception.SlackValidationException;
+import com.n1netails.n1netails.slack.fallback.SlackFallbackHandler;
+import com.n1netails.n1netails.slack.validation.SlackValidators;
 import com.slack.api.model.block.LayoutBlock;
 import lombok.Getter;
 import lombok.Setter;
@@ -47,32 +50,59 @@ public class SlackMessage {
             return this;
         }
 
-        public Builder addBlock(SlackBlock block) {
+        public Builder addBlock(SlackBlock block) throws SlackValidationException {
+            if (!rawBlocks.isEmpty()) {
+                throw new SlackValidationException(
+                        "Cannot add SlackBlock when rawBlocks are already present"
+                );
+            }
             this.blocks.add(block);
             return this;
         }
 
-        public Builder addRawBlock(LayoutBlock block) {
+        public Builder addRawBlock(LayoutBlock block) throws SlackValidationException {
+            if (!blocks.isEmpty()) {
+                throw new SlackValidationException(
+                        "Cannot add rawBlock when SlackBlocks are already present"
+                );
+            }
             this.rawBlocks.add(block);
             return this;
         }
 
-        public SlackMessage build() {
+        public SlackMessage build() throws SlackValidationException {
             if (channel == null || channel.isBlank()) {
-                throw new IllegalStateException("channel is required");
+                throw new SlackValidationException("channel is required");
             }
 
-            boolean hasTextOrBlocks = (text != null && !text.isBlank())
-                    || (!blocks.isEmpty())
-                    || (!rawBlocks.isEmpty());
+            boolean hasContent = (text != null && !text.isBlank())
+                    || !blocks.isEmpty()
+                    || !rawBlocks.isEmpty();
 
-            if (!hasTextOrBlocks) {
-                throw new IllegalStateException("Either text, blocks, or rawBlocks must be provided");
+            if (!hasContent) {
+                throw new SlackValidationException(
+                        "Either text, blocks, or rawBlocks must be provided"
+                );
             }
 
             if (!blocks.isEmpty() && !rawBlocks.isEmpty()) {
-                throw new IllegalStateException("Cannot mix SlackBlock and rawBlocks in the same message");
+                throw new SlackValidationException(
+                        "Cannot mix SlackBlock and rawBlocks in the same message"
+                );
             }
+            List<SlackBlock> processedBlocks = new ArrayList<>();
+
+            for (SlackBlock block : blocks) {
+                try {
+                    SlackValidators.validate(block);
+                    processedBlocks.add(block);
+                } catch (Exception e) {
+                    processedBlocks.add(SlackFallbackHandler.handle(block, e));
+                }
+            }
+
+            this.blocks.clear();
+            this.blocks.addAll(processedBlocks);
 
             return new SlackMessage(this);
         }

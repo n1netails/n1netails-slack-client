@@ -4,9 +4,10 @@ import com.n1netails.n1netails.slack.model.SlackBlock;
 import com.slack.api.model.block.Blocks;
 import com.slack.api.model.block.LayoutBlock;
 import com.slack.api.model.block.composition.BlockCompositions;
+import lombok.Getter;
 
-import java.util.List;
 
+@Getter
 public class ImageBlock implements SlackBlock {
     private final String imageUrl;
     private final String altText;
