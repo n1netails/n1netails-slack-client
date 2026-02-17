@@ -38,7 +38,7 @@ final class SlackClientImpl implements SlackClient {
         @Override
         public SlackClient build() throws SlackClientException {
             if (this.token == null || this.token.isBlank())
-                throw new SlackClientException("token must be provided");
+                throw new SlackClientException("Token must be provided");
 
             return new SlackClientImpl(this);
         }

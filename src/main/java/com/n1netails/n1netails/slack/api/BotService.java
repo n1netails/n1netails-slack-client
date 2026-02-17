@@ -1,5 +1,6 @@
 package com.n1netails.n1netails.slack.api;
 
+import com.n1netails.n1netails.slack.exception.SlackApiExceptionWrapper;
 import com.n1netails.n1netails.slack.exception.SlackClientException;
 import com.n1netails.n1netails.slack.model.SlackBlock;
 import com.n1netails.n1netails.slack.model.SlackMessage;
@@ -57,11 +58,13 @@ class BotService {
             ChatPostMessageResponse response = methods.chatPostMessage(requestBuilder.build());
 
             if (!response.isOk()) {
-                throw new SlackClientException("Slack API error: " + response.getError());
+                throw new SlackApiExceptionWrapper(response.getError());
             }
 
-        } catch (IOException | SlackApiException e) {
-            throw new SlackClientException("Failed to send Slack message to channel: " + slackMessage.getChannel(), e);
+        } catch (IOException e) {
+            throw new SlackClientException("Network error while calling Slack API", e);
+        } catch (SlackApiException e) {
+            throw new SlackClientException("Slack SDK failure" + slackMessage.getChannel(), e);
         }
     }
 
