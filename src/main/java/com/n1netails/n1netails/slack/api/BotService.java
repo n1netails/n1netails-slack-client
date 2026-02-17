@@ -1,4 +1,4 @@
-package com.n1netails.n1netails.slack.service;
+package com.n1netails.n1netails.slack.api;
 
 import com.n1netails.n1netails.slack.exception.SlackClientException;
 import com.n1netails.n1netails.slack.model.SlackMessage;
@@ -8,14 +8,16 @@ import com.slack.api.methods.request.chat.ChatPostMessageRequest;
 
 /**
  * Slack Bot Service
+ *
  * @author shahid foy
  */
-public class BotService {
+class BotService {
 
     private final String token;
 
     /**
      * Bot Service Constructor
+     *
      * @param token slack bot token
      */
     public BotService(String token) {
