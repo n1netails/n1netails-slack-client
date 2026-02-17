@@ -2,6 +2,8 @@ package com.n1netails.n1netails.slack.api;
 
 import com.n1netails.n1netails.slack.exception.SlackApiExceptionWrapper;
 import com.n1netails.n1netails.slack.exception.SlackClientException;
+import com.n1netails.n1netails.slack.exception.SlackTransportException;
+import com.n1netails.n1netails.slack.exception.SlackValidationException;
 import com.n1netails.n1netails.slack.model.SlackBlock;
 import com.n1netails.n1netails.slack.model.SlackMessage;
 import com.slack.api.Slack;
@@ -40,6 +42,7 @@ class BotService {
                     ChatPostMessageRequest.builder()
                             .channel(slackMessage.getChannel())
                             .text(slackMessage.getText());
+
             List<LayoutBlock> finalBlocks;
             if (slackMessage.getRawBlocks() != null && !slackMessage.getRawBlocks().isEmpty()) {
                 finalBlocks = slackMessage.getRawBlocks();
@@ -62,15 +65,15 @@ class BotService {
             }
 
         } catch (IOException e) {
-            throw new SlackClientException("Network error while calling Slack API", e);
+            throw new SlackTransportException("Network error while calling Slack API", e);
         } catch (SlackApiException e) {
-            throw new SlackClientException("Slack SDK failure" + slackMessage.getChannel(), e);
+            throw new SlackTransportException("Slack SDK failure" + slackMessage.getChannel(), e);
         }
     }
 
     private void validateSlackMessage(SlackMessage slackMessage) throws SlackClientException {
         if (slackMessage == null) {
-            throw new SlackClientException("slackMessage cannot be null");
+            throw new SlackValidationException("slackMessage cannot be null");
         }
 
     }
