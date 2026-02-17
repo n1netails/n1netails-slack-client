@@ -47,13 +47,15 @@ implementation 'com.n1netails:n1netails-slack-client:0.2.0'
 ```
 
 ## Usage
-Here's how to use the client to send a message:
+Here's how to use the client to send a message, pics or gifs:
 
 ```java
 import com.n1netails.n1netails.slack.api.SlackClient;
 import com.n1netails.n1netails.slack.api.SlackClientImpl;
 import com.n1netails.n1netails.slack.model.SlackMessage;
 import com.n1netails.n1netails.slack.api.BotService;
+import com.n1netails.n1netails.slack.model.blocks.GifBlock;
+import com.n1netails.n1netails.slack.model.blocks.TextBlock;
 
 public class Example {
     public static void main(String[] args) {
@@ -67,9 +69,13 @@ public class Example {
         SlackClient client = SlackClient.builder().token(token).build();
 
         // Create the message
-        SlackMessage message = new SlackMessage();
-        message.setChannel(channel);
-        message.setText("Hello from the N1ne Tails Slack Client!");
+        SlackMessage message = SlackMessage.builder()
+                .channel("test")
+                .text("New content 🚀") //Remember if use ANY blocks this text becomes a fallback message for notifications
+                .addBlock(new TextBlock("New content 🚀"))
+                .addBlock(new ImageBlock("YOUR IMG LINK", "YOUR ALT TEXT"))
+                .addBlock(new GifBlock("YOUR GIF LINK", "YOUR ALT TEXT"))
+                .build();
 
         try {
             // Send the message
