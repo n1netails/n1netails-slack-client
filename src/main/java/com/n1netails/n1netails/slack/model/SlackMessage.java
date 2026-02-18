@@ -100,10 +100,7 @@ public class SlackMessage {
             }
             List<SlackBlock> processedBlocks = processBlocks(blocks);
 
-            this.blocks.clear();
-            this.blocks.addAll(processedBlocks);
-
-            return new SlackMessage(channel, text, processedBlocks, List.copyOf(rawBlocks));
+            return new SlackMessage(channel, text, List.copyOf(processedBlocks), List.copyOf(rawBlocks));
         }
 
         private List<SlackBlock> processBlocks(List<SlackBlock> blocks) {
@@ -116,7 +113,7 @@ public class SlackMessage {
                     processedBlocks.add(SlackFallbackHandler.handle(block, e));
                 }
             }
-            return List.copyOf(processedBlocks);
+            return processedBlocks;
         }
 
     }
