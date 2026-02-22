@@ -1,11 +1,8 @@
 package com.n1netails.n1netails.slack.model;
 
 import com.n1netails.n1netails.slack.exception.SlackValidationException;
-import com.n1netails.n1netails.slack.fallback.SlackFallbackHandler;
-import com.n1netails.n1netails.slack.validation.SlackValidators;
 import com.slack.api.model.block.LayoutBlock;
 import lombok.Getter;
-import lombok.Setter;
 
 import java.util.ArrayList;
 import java.util.List;
