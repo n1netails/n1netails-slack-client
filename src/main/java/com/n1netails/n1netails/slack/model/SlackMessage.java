@@ -30,12 +30,6 @@ public class SlackMessage {
         this.rawBlocks = List.copyOf(builder.rawBlocks);
     }
 
-    private SlackMessage(String channel, String text, List<SlackBlock> blocks, List<LayoutBlock> rawBlocks) {
-        this.channel = channel;
-        this.text = text;
-        this.blocks = blocks;
-        this.rawBlocks = rawBlocks;
-    }
 
     public static Builder builder() {
         return new Builder();
@@ -98,22 +92,8 @@ public class SlackMessage {
                         "Cannot mix SlackBlock and rawBlocks in the same message"
                 );
             }
-            List<SlackBlock> processedBlocks = processBlocks(blocks);
 
-            return new SlackMessage(channel, text, List.copyOf(processedBlocks), List.copyOf(rawBlocks));
-        }
-
-        private List<SlackBlock> processBlocks(List<SlackBlock> blocks) {
-            List<SlackBlock> processedBlocks = new ArrayList<>();
-            for (SlackBlock block : blocks) {
-                try {
-                    SlackValidators.validate(block);
-                    processedBlocks.add(block);
-                } catch (Exception e) {
-                    processedBlocks.add(SlackFallbackHandler.handle(block, e));
-                }
-            }
-            return processedBlocks;
+            return new SlackMessage(this);
         }
 
     }
