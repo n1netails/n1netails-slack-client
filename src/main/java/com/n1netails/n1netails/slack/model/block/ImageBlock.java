@@ -10,9 +10,13 @@ public class ImageBlock implements SlackBlock {
     private final String imageUrl;
     private final String altText;
 
-    public ImageBlock(String imageUrl, String altText) {
+    private ImageBlock(String imageUrl, String altText) {
         this.imageUrl = imageUrl;
         this.altText = altText;
+    }
+
+    public ImageBlock of(String imageUrl, String altText) {
+        return new ImageBlock(imageUrl, altText);
     }
 
 

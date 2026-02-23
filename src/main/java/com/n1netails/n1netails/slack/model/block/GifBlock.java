@@ -9,9 +9,13 @@ public class GifBlock implements SlackBlock {
     private final String gifUrl;
     private final String altText;
 
-    public GifBlock(String gifUrl, String altText) {
+    private GifBlock(String gifUrl, String altText) {
         this.gifUrl = gifUrl;
         this.altText = altText;
+    }
+
+    public static GifBlock of(String gifUrl, String altText) {
+        return new GifBlock(gifUrl, altText);
     }
 
 

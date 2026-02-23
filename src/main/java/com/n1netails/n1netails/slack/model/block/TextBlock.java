@@ -9,8 +9,12 @@ import lombok.Getter;
 public class TextBlock implements SlackBlock {
     private final String text;
 
-    public TextBlock(String text) {
+    private TextBlock(String text) {
         this.text = text;
+    }
+
+    public TextBlock of(String text) {
+        return new TextBlock(text);
     }
 
     @Override
