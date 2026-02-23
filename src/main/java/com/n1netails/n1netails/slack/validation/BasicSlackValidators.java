@@ -1,12 +1,13 @@
 package com.n1netails.n1netails.slack.validation;
 
-import com.n1netails.n1netails.slack.exception.SlackValidationException;
-import com.n1netails.n1netails.slack.model.blocks.GifBlock;
-import com.n1netails.n1netails.slack.model.blocks.ImageBlock;
-import com.n1netails.n1netails.slack.model.blocks.TextBlock;
-import com.n1netails.n1netails.slack.validation.impl.GifBlockValidator;
-import com.n1netails.n1netails.slack.validation.impl.ImageBlockValidator;
-import com.n1netails.n1netails.slack.validation.impl.TextBlockValidator;
+import com.n1netails.n1netails.slack.model.block.ActionsBlock;
+import com.n1netails.n1netails.slack.model.block.GifBlock;
+import com.n1netails.n1netails.slack.model.block.ImageBlock;
+import com.n1netails.n1netails.slack.model.block.TextBlock;
+import com.n1netails.n1netails.slack.validation.impl.block.ActionsBlockValidator;
+import com.n1netails.n1netails.slack.validation.impl.block.GifBlockValidator;
+import com.n1netails.n1netails.slack.validation.impl.block.ImageBlockValidator;
+import com.n1netails.n1netails.slack.validation.impl.block.TextBlockValidator;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,11 +15,18 @@ import java.util.Map;
 public class BasicSlackValidators {
     private final Map<Class<?>, SlackValidator<?>> validators = new HashMap<>();
 
+
     public BasicSlackValidators() {
+        init();
+    }
+
+    private void init() {
         validators.put(ImageBlock.class, new ImageBlockValidator());
         validators.put(GifBlock.class, new GifBlockValidator());
         validators.put(TextBlock.class, new TextBlockValidator());
+        validators.put(ActionsBlock.class, new ActionsBlockValidator(this));
     }
+
     public <T> void validate(T target) {
         if (target == null) return;
         SlackValidator<T> validator = (SlackValidator<T>) validators.get(target.getClass());
