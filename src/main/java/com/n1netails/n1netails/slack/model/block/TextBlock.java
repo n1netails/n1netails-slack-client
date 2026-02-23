@@ -9,6 +9,26 @@ import lombok.Getter;
 
 import java.util.List;
 
+/**
+ * Represents a Slack Text Block (Section Block) containing plain text.
+ * <p>
+ * Use {@link #of(String)} or the {@link Builder} to create instances.
+ * This block displays text in a Slack message and does not support child nodes.
+ * </p>
+ * <p>
+ * Example usage:
+ * <pre>{@code
+ * TextBlock block = TextBlock.of("Hello, Slack!");
+ * }</pre>
+ *
+ * <p>Converts to a Slack API {@link LayoutBlock} via {@link #toLayoutBlock()}.</p>
+ *
+ * <p>All instances are immutable once created.</p>
+ *
+ * <p>{@link #getChildren()} always returns an empty list.</p>
+ *
+ * @author Artur Slimak
+ */
 @Getter
 public class TextBlock implements SlackBlock {
     private final String text;

@@ -8,7 +8,29 @@ import lombok.Getter;
 
 import java.util.List;
 
-
+/**
+ * Represents a Slack Image Block.
+ * <p>
+ * An Image Block displays an image in a Slack message with an alternative text for accessibility.
+ * Use {@link #of(String, String)} or the {@link Builder} to create instances.
+ * </p>
+ *
+ * Example usage:
+ * <pre>{@code
+ * ImageBlock image = ImageBlock.of(
+ *     "https://example.com/image.png",
+ *     "Descriptive alt text"
+ * );
+ * }</pre>
+ *
+ * <p>Converts to a Slack API {@link LayoutBlock} via {@link #toLayoutBlock()}.</p>
+ *
+ * <p>This block does not contain child nodes, so {@link #getChildren()} returns an empty list.</p>
+ *
+ * <p>All instances are immutable once created.</p>
+ *
+ * @author Artur Slimak
+ */
 @Getter
 public class ImageBlock implements SlackBlock {
     private final String imageUrl;

@@ -18,19 +18,39 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Slack Bot Service
+ * Service responsible for sending messages to Slack via the Slack SDK.
+ * <p>
+ * Encapsulates the Slack {@link MethodsClient}, performs message validation,
+ * and builds message blocks using {@link SlackBlockBuilder}.
+ * Handles transport and validation exceptions internally.
+ * </p>
+ * <p>
+ * Example usage:
+ * <pre>{@code
+ * BotService botService = new BotService("xoxb-your-token");
+ * SlackMessage message = new SlackMessage("general", "Hello, Slack!");
+ * botService.send(message);
+ * }</pre>
  *
- * @author shahid foy
+ * <p>All messages are validated before sending. Text or blocks must be present
+ * in the {@link SlackMessage}, otherwise a {@link SlackValidationException} is thrown.</p>
+ *
+ * <p>Exceptions thrown:</p>
+ * <ul>
+ *     <li>{@link SlackTransportException} – for network/SDK errors</li>
+ * </ul>
+ *
+ * @author Shahid Foy and Artur Slimak
  */
-final class BotService {
+final public class BotService {
     private final MethodsClient methods;
     private final SlackBlockValidator blockValidator;
     private final SlackBlockBuilder blockBuilder;
 
     /**
-     * Bot Service Constructor
+     * Constructs a new {@link BotService} with the given Slack bot token.
      *
-     * @param token slack bot token
+     * @param token Slack bot token for authentication; must not be null or blank
      */
     public BotService(String token) {
         this.methods = Slack.getInstance().methods(token);
@@ -39,6 +59,17 @@ final class BotService {
 
     }
 
+
+    /**
+     * Sends a {@link SlackMessage} to Slack.
+     * <p>
+     * The message is validated for basic requirements (text or blocks present),
+     * and all blocks are validated via {@link SlackBlockValidator}.
+     * </p>
+     *
+     * @param slackMessage the message to send; must not be null
+     * @throws SlackClientException if validation fails or sending fails due to network/Slack API errors
+     */
     public void send(SlackMessage slackMessage) throws SlackClientException {
         validateBasic(slackMessage);
 
@@ -65,7 +96,15 @@ final class BotService {
         }
     }
 
-
+    /**
+     * Performs basic validation on a {@link SlackMessage}.
+     * <p>
+     * Ensures that the message is not null and contains either text, blocks, or raw blocks.
+     * </p>
+     *
+     * @param message the Slack message to validate
+     * @throws SlackValidationException if the message is null or contains no text/blocks
+     */
     private void validateBasic(SlackMessage message) throws SlackValidationException {
         if (message == null) {
             throw new SlackValidationException("SlackMessage cannot be null");

@@ -4,28 +4,42 @@ import com.n1netails.n1netails.slack.exception.SlackClientException;
 import com.n1netails.n1netails.slack.model.SlackMessage;
 
 /**
- * Slack Client Implementation
+ * Concrete implementation of {@link SlackClient}.
+ * <p>
+ * Uses {@link BotService} internally to send messages to Slack.
+ * Created via {@link SlackClientImpl.Builder}.
+ * </p>
  *
- * @author shahid foy
+ * Example:
+ * <pre>{@code
+ * SlackClient client = SlackClientImpl.builder()
+ *                                     .token("xoxb-your-token")
+ *                                     .build();
+ * client.sendMessage(new SlackMessage("Hello!"));
+ * }</pre>
+ *
+ * @author Artur Slimak
  */
 final class SlackClientImpl implements SlackClient {
 
     private final BotService botService;
 
-    public SlackClientImpl(Builder builder) {
+    private SlackClientImpl(Builder builder) {
         this.botService = new BotService(builder.token);
     }
 
-    /**
-     * Send slack notification
-     *
-     * @param slackMessage slack message
-     */
     @Override
     public void sendMessage(SlackMessage slackMessage) throws SlackClientException {
         botService.send(slackMessage);
     }
 
+    /**
+     * Builder for {@link SlackClientImpl}.
+     * <p>
+     * Implements the {@link SlackClient.Builder} interface.
+     * Used to configure and construct an instance of {@link SlackClientImpl}.
+     * </p>
+     */
     public static final class Builder implements SlackClient.Builder {
         private String token;
 

@@ -8,6 +8,30 @@ import lombok.Getter;
 
 import java.util.List;
 
+/**
+ * Represents a Slack Image Block containing a GIF.
+ * <p>
+ * This block displays a GIF in a Slack message. Use {@link #of(String, String)} or the {@link Builder}
+ * to create instances. The GIF URL must be publicly accessible, and altText provides a description
+ * for accessibility and fallback display.
+ * </p>
+ * <p>
+ * Example usage:
+ * <pre>{@code
+ * GifBlock gif = GifBlock.of(
+ *     "https://media.giphy.com/media/3oEjI6SIIHBdRxXI40/giphy.gif",
+ *     "Funny dancing cat"
+ * );
+ * }</pre>
+ *
+ * <p>Converts to a Slack API {@link LayoutBlock} via {@link #toLayoutBlock()}.</p>
+ *
+ * <p>This block does not contain child nodes, so {@link #getChildren()} returns an empty list.</p>
+ *
+ * <p>All instances are immutable once created.</p>
+ *
+ * @author Artur Slimak
+ */
 @Getter
 public class GifBlock implements SlackBlock {
     private final String gifUrl;
