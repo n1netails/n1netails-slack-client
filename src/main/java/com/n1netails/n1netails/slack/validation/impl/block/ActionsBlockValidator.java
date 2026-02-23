@@ -7,21 +7,11 @@ import com.n1netails.n1netails.slack.validation.BasicSlackValidators;
 import com.n1netails.n1netails.slack.validation.SlackValidator;
 
 public class ActionsBlockValidator implements SlackValidator<ActionsBlock> {
-    private final BasicSlackValidators validators;
-
-    public ActionsBlockValidator(BasicSlackValidators validators) {
-        this.validators = validators;
-    }
-
     @Override
     public void validate(ActionsBlock target) throws SlackValidationException {
         if (target.getElements() == null || target.getElements().isEmpty()) {
             throw new SlackValidationException("ActionsBlock must contain at least one element");
         }
 
-
-        for (SlackElement element : target.getElements()) {
-            validators.validate(element);
-        }
     }
 }

@@ -1,8 +1,11 @@
 package com.n1netails.n1netails.slack.model.actions_element;
 
 import com.n1netails.n1netails.slack.model.SlackElement;
+import com.n1netails.n1netails.slack.model.SlackNode;
 import com.slack.api.model.block.element.BlockElement;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 public class ButtonElement implements SlackElement {
@@ -37,6 +40,11 @@ public class ButtonElement implements SlackElement {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public List<SlackNode> getChildren() {
+        return List.of();
     }
 
     public static class Builder {

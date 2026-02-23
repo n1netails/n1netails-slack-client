@@ -2,9 +2,12 @@ package com.n1netails.n1netails.slack.model.block;
 
 import com.n1netails.n1netails.slack.exception.SlackValidationException;
 import com.n1netails.n1netails.slack.model.SlackBlock;
+import com.n1netails.n1netails.slack.model.SlackNode;
 import com.slack.api.model.block.LayoutBlock;
 import com.slack.api.model.block.composition.PlainTextObject;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 public class TextBlock implements SlackBlock {
@@ -23,6 +26,11 @@ public class TextBlock implements SlackBlock {
         return com.slack.api.model.block.SectionBlock.builder()
                 .text(new PlainTextObject(text, false))
                 .build();
+    }
+
+    @Override
+    public List<SlackNode> getChildren() {
+        return List.of();
     }
 
     public static class Builder {

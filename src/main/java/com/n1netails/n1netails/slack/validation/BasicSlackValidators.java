@@ -26,7 +26,7 @@ public class BasicSlackValidators {
         validators.put(ImageBlock.class, new ImageBlockValidator());
         validators.put(GifBlock.class, new GifBlockValidator());
         validators.put(TextBlock.class, new TextBlockValidator());
-        validators.put(ActionsBlock.class, new ActionsBlockValidator(this));
+        validators.put(ActionsBlock.class, new ActionsBlockValidator());
         validators.put(ButtonElement.class, new ButtonElementValidator());
     }
 

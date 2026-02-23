@@ -41,25 +41,32 @@ public class SlackErrorMapper {
             return message;
 
         } catch (Exception e) {
-            return rawError; // fallback
+            return rawError;
         }
     }
 
     private static String mapPointer(String pointer, String message) {
         String[] parts = pointer.split("/");
 
-        if (parts.length >= 4 && "blocks".equals(parts[1])) {
-            int index = Integer.parseInt(parts[2]);
-            String field = parts[3];
+        StringBuilder path = new StringBuilder();
 
-            return String.format(
-                    "Block[%d].%s: %s",
-                    index,
-                    field,
-                    message
-            );
+        for (int i = 1; i < parts.length; i++) {
+            String part = parts[i];
+
+            if (isNumeric(part)) {
+                path.append("[").append(part).append("]");
+            } else {
+                if (!path.isEmpty()) {
+                    path.append(".");
+                }
+                path.append(part);
+            }
         }
 
-        return pointer + ": " + message;
+        return path + ": " + message;
+    }
+
+    private static boolean isNumeric(String str) {
+        return str.chars().allMatch(Character::isDigit);
     }
 }

@@ -4,6 +4,6 @@ import com.slack.api.model.block.LayoutBlock;
 
 import java.util.List;
 
-public interface SlackBlock {
+public interface SlackBlock extends SlackNode {
     LayoutBlock toLayoutBlock();
 }

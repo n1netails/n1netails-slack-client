@@ -1,11 +1,12 @@
 package com.n1netails.n1netails.slack.api;
 
+import com.n1netails.n1netails.slack.api.builder.SlackBlockBuilder;
 import com.n1netails.n1netails.slack.exception.SlackErrorMapper;
 import com.n1netails.n1netails.slack.exception.SlackClientException;
 import com.n1netails.n1netails.slack.exception.SlackTransportException;
 import com.n1netails.n1netails.slack.exception.SlackValidationException;
 import com.n1netails.n1netails.slack.model.SlackMessage;
-import com.n1netails.n1netails.slack.processing.SlackBlockProcessor;
+import com.n1netails.n1netails.slack.validation.SlackBlockValidator;
 import com.slack.api.Slack;
 import com.slack.api.methods.MethodsClient;
 import com.slack.api.methods.SlackApiException;
@@ -23,7 +24,8 @@ import java.util.List;
  */
 class BotService {
     private final MethodsClient methods;
-    private final SlackBlockProcessor blockProcessor;
+    private final SlackBlockValidator blockValidator;
+    private final SlackBlockBuilder blockBuilder;
 
     /**
      * Bot Service Constructor
@@ -32,14 +34,26 @@ class BotService {
      */
     public BotService(String token) {
         this.methods = Slack.getInstance().methods(token);
-        this.blockProcessor = new SlackBlockProcessor();
+        this.blockValidator = new SlackBlockValidator();
+        this.blockBuilder = new SlackBlockBuilder();
 
     }
 
     public void send(SlackMessage slackMessage) throws SlackClientException {
         validateBasic(slackMessage);
+
+        blockValidator.validateMessageBlocks(slackMessage);
+
         try {
-            ChatPostMessageRequest request = buildRequest(slackMessage);
+            List<LayoutBlock> blocks = blockBuilder.build(slackMessage);
+
+            ChatPostMessageRequest request =
+                    ChatPostMessageRequest.builder()
+                            .channel(slackMessage.getChannel())
+                            .text(slackMessage.getText())
+                            .blocks(blocks)
+                            .build();
+
             ChatPostMessageResponse response = methods.chatPostMessage(request);
             if (!response.isOk()) {
                 throw SlackErrorMapper.map(response);
@@ -64,19 +78,4 @@ class BotService {
             throw new SlackValidationException("Message must contain text or blocks");
         }
     }
-
-
-    private ChatPostMessageRequest buildRequest(SlackMessage slackMessage) {
-        ChatPostMessageRequest.ChatPostMessageRequestBuilder requestBuilder =
-                ChatPostMessageRequest.builder()
-                        .channel(slackMessage.getChannel())
-                        .text(slackMessage.getText());
-
-        List<LayoutBlock> blocks = blockProcessor.process(slackMessage);
-        if ((blocks != null && !blocks.isEmpty()))
-            requestBuilder.blocks(blocks);
-        return requestBuilder.build();
-    }
-
-
 }

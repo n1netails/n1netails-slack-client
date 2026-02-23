@@ -2,6 +2,7 @@ package com.n1netails.n1netails.slack.model.block;
 
 import com.n1netails.n1netails.slack.model.SlackBlock;
 import com.n1netails.n1netails.slack.model.SlackElement;
+import com.n1netails.n1netails.slack.model.SlackNode;
 import com.slack.api.model.block.LayoutBlock;
 import lombok.Getter;
 
@@ -34,6 +35,11 @@ public class ActionsBlock implements SlackBlock {
 
     public static Builder builder() {
         return new Builder();
+    }
+
+    @Override
+    public List<SlackNode> getChildren() {
+        return List.copyOf(elements);
     }
 
     public static class Builder {

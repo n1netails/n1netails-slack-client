@@ -2,8 +2,11 @@ package com.n1netails.n1netails.slack.model.block;
 
 import com.n1netails.n1netails.slack.exception.SlackValidationException;
 import com.n1netails.n1netails.slack.model.SlackBlock;
+import com.n1netails.n1netails.slack.model.SlackNode;
 import com.slack.api.model.block.LayoutBlock;
 import lombok.Getter;
+
+import java.util.List;
 
 @Getter
 public class GifBlock implements SlackBlock {
@@ -28,6 +31,11 @@ public class GifBlock implements SlackBlock {
                         .imageUrl(gifUrl)
                         .build()
                 ;
+    }
+
+    @Override
+    public List<SlackNode> getChildren() {
+        return List.of();
     }
 
     public static class Builder {
