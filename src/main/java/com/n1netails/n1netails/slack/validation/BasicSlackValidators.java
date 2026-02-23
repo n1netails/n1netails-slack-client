@@ -18,7 +18,7 @@ public class BasicSlackValidators {
     private final Map<Class<?>, SlackValidator<?>> validators = new HashMap<>();
 
 
-    public BasicSlackValidators() {
+    BasicSlackValidators() {
         init();
     }
 

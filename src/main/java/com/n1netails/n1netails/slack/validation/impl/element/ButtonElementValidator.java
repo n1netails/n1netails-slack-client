@@ -16,6 +16,5 @@ public class ButtonElementValidator implements SlackValidator<ButtonElement> {
                     "Button must have either actionId or url"
             );
         }
-
     }
 }

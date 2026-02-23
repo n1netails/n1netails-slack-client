@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author shahid foy
  */
-class BotService {
+final class BotService {
     private final MethodsClient methods;
     private final SlackBlockValidator blockValidator;
     private final SlackBlockBuilder blockBuilder;
