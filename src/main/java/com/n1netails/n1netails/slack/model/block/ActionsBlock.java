@@ -13,8 +13,12 @@ public class ActionsBlock implements SlackBlock {
 
     private final List<SlackElement> elements;
 
-    public ActionsBlock(List<SlackElement> elements) {
-        this.elements = elements;
+    private ActionsBlock(List<SlackElement> elements) {
+        this.elements = List.copyOf(elements);
+    }
+
+    public static ActionsBlock of(List<SlackElement> elements) {
+        return new ActionsBlock(elements);
     }
 
     @Override
@@ -26,5 +30,22 @@ public class ActionsBlock implements SlackBlock {
                                 .toList()
                 )
                 .build();
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+        private final List<SlackElement> elements = new ArrayList<>();
+
+        public Builder addElement(SlackElement element) {
+            elements.add(element);
+            return this;
+        }
+
+        public ActionsBlock build() {
+            return new ActionsBlock(elements);
+        }
     }
 }
