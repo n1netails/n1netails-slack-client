@@ -185,3 +185,9 @@ For community users, open an issue on GitHub or Join our Discord
 ## Contributing
 
 Please use the following guidelines for contributions [CONTRIBUTING](./contributing.md)
+
+## N1netails Slack Client Contributors
+
+Thanks to all the amazing people who contributed to N1netails Slack Client! 💙
+
+[![Contributors](https://contrib.rocks/image?repo=n1netails/n1netails-slack-client)](https://github.com/n1netails/n1netails-slack-client/graphs/contributors)
