@@ -17,8 +17,8 @@ import java.util.List;
  *
  * <p>Validation rules:</p>
  * <ul>
- *     <li>If {@link SlackMessage#getRawBlocks()} is non-empty, validation is skipped.</li>
- *     <li>If {@link SlackMessage#getBlocks()} is empty or null, validation is skipped.</li>
+ *     <li>If {@link SlackMessage#rawBlocks} is non-empty, validation is skipped.</li>
+ *     <li>If {@link SlackMessage#blocks} is empty or null, validation is skipped.</li>
  *     <li>All blocks and child elements are validated using their respective {@link SlackValidator} implementations.</li>
  * </ul>
  *

@@ -19,6 +19,7 @@ import java.util.Map;
  * Registry of basic Slack validators for common blocks and elements.
  * <p>
  * Provides automatic validation of:
+ * </p>
  * <ul>
  *     <li>{@link ImageBlock}</li>
  *     <li>{@link GifBlock}</li>
@@ -26,6 +27,7 @@ import java.util.Map;
  *     <li>{@link ActionsBlock}</li>
  *     <li>...</li>
  * </ul>
+ * <p>
  * Can be extended with custom validators for additional Slack nodes.
  * </p>
  *
@@ -55,7 +57,7 @@ public class BasicSlackValidators {
      * If no validator exists for the target type, or the target is {@code null}, validation is skipped.
      * </p>
      *
-     * @param <T> the type of object to validate
+     * @param <T>    the type of object to validate
      * @param target the object to validate
      * @throws SlackValidationException if validation fails
      */

@@ -27,12 +27,12 @@ public class SlackBlockBuilder {
      * Builds a list of {@link LayoutBlock}s from a {@link SlackMessage}.
      * <p>
      * Priority order:
+     * </p>
      * <ol>
      *     <li>If {@code rawBlocks} are present in the message, return them as-is.</li>
      *     <li>If {@code blocks} are present, convert each {@link SlackBlock} to {@link LayoutBlock}.</li>
      *     <li>If neither is present, returns {@code null}.</li>
      * </ol>
-     * </p>
      *
      * @param message the Slack message to convert; must not be null
      * @return list of {@link LayoutBlock}s or {@code null} if none are available
