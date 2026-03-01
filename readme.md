@@ -80,7 +80,6 @@ public class Example {
                 .build();
 
         // Build the Slack message
-        // Build the Slack message
         SlackMessage message = SlackMessage.builder()
                 .channel(channel)
                 .text("New content 🚀") // fallback message for notifications
@@ -156,6 +155,11 @@ public class AdvancedExample {
   <img src="slack-message.png" alt="N1netails slack message simple" width="500" style="display: block; margin: auto;"/>
 </div>
 
+#### Example media output
+<div align="center">
+  <img src="slack-media-message.png" alt="N1netails slack message simple" width="500" style="display: block; margin: auto;"/>
+</div>
+
 # Develop
 ## Build
 Build the project using the following command
@@ -176,6 +180,41 @@ Maven deploy to the maven central repository
 ```bash
 mvn deploy -P release
 ```
+
+### GPG
+Generate keys
+```bash
+gpg --full-generate-key
+```
+
+List keys
+```bash
+gpg --list-secret-keys --keyid-format LONG
+```
+
+Export
+### Export private key
+```bash
+gpg --export-secret-keys --armor YOUR_KEY_ID > private.asc
+```
+
+### Export public key
+
+```bash
+gpg --export --armor YOUR_KEY_ID > public.asc
+```
+
+Import
+```bash
+gpg --import private.asc
+gpg --import public.asc
+```
+
+List packets (good for validating keys were exported correctly)
+```bash
+gpg --list-packets public.asc
+```
+
 
 ## Support
 
