@@ -4,7 +4,7 @@ package com.n1netails.n1netails.slack.exception;
  * Slack Client Exception
  * @author shahid foy
  */
-public class SlackClientException extends Exception {
+public class SlackClientException extends RuntimeException {
 
     /**
      * Slack Client Exception Constructor

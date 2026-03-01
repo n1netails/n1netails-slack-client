@@ -4,7 +4,7 @@
 
   <groupId>com.n1netails</groupId>
   <artifactId>n1netails-slack-client</artifactId>
-  <version>0.2.0</version>
+  <version>0.3.0</version>
   <packaging>jar</packaging>
 
   <name>n1netails-slack-client</name>
@@ -16,8 +16,27 @@
     <connection>scm:git:git://github.com/n1netails/n1netails-slack-client.git</connection>
     <developerConnection>scm:git:ssh://git@github.com:n1netails/n1netails-slack-client.git</developerConnection>
   </scm>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+              <version>3.15.0</version>
+                <configuration>
+                  <release>17</release>
+                  <annotationProcessorPaths>
+                    <path>
+                      <groupId>org.projectlombok</groupId>
+                      <artifactId>lombok</artifactId>
+                      <version>1.18.42</version>
+                    </path>
+                  </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-  <licenses>
+    <licenses>
     <license>
       <name>MIT License</name>
       <url>https://opensource.org/licenses/MIT</url>
@@ -38,8 +57,8 @@
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
   <dependencies>
@@ -53,7 +72,7 @@
     <dependency>
       <groupId>com.slack.api</groupId>
       <artifactId>slack-api-client</artifactId>
-      <version>1.45.4</version>
+      <version>1.47.0</version>
     </dependency>
   </dependencies>
 
