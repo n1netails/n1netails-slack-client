@@ -36,7 +36,7 @@ Install the slack client by adding the following dependency:
 ```xml
 <dependency>
     <groupId>com.n1netails</groupId>
-    <artifactId>n1netails-slack-client</artifactId>
+    <artifactId>slack-client</artifactId>
     <version>0.3.0</version>
 </dependency>
 ```
