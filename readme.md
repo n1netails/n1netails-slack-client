@@ -43,7 +43,7 @@ Install the slack client by adding the following dependency:
 
 Gradle (Groovy)
 ```groovy
-implementation 'com.n1netails:n1netails-slack-client:0.3.0'
+implementation 'com.n1netails:slack-client:0.3.0'
 ```
 
 ## Usage
