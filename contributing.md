@@ -6,7 +6,7 @@ We welcome contributions from the community! Whether you're fixing bugs, improvi
 
 ## 🧰 Before You Start
 
-- Make sure you've read our [LICENSE](./LICENSE) and agree to its terms.
+- Make sure you've read our [LICENSE](slack-client/LICENSE) and agree to its terms.
 - If you plan to submit major changes, open an issue first to discuss your proposal.
 
 ---
