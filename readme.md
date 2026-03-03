@@ -4,7 +4,7 @@
   <img src="https://raw.githubusercontent.com/n1netails/n1netails/refs/heads/main/n1netails_icon_transparent.png" alt="N1ne Tails" width="500" style="display: block; margin: auto;"/>
 </div>
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](slack-client/LICENSE)
 
 ![Stars](https://img.shields.io/github/stars/n1netails/n1netails-slack-client)
 ![Issues](https://img.shields.io/github/issues/n1netails/n1netails-slack-client)
@@ -224,7 +224,7 @@ For community users, open an issue on GitHub or Join our Discord
 
 ## Contributing
 
-Please use the following guidelines for contributions [CONTRIBUTING](./contributing.md)
+Please use the following guidelines for contributions [CONTRIBUTING](slack-client/contributing.md)
 
 ## N1netails Slack Client Contributors
 
